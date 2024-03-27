@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="adminCommon::common-header"></head>
+<body class="sb-nav-fixed">
+<nav th:replace="adminCommon::common-navbar"></nav>
+<div id="layoutSidenav">
+    <div th:replace="adminCommon::common-sidenav"></div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Add class</h1>
+
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="@{/toAdminMain}">Homepage</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/class/selClass}">Course management</a></li>
+                    <li class="breadcrumb-item active">Add class</li>
+                </ol>
+
+                <div class="card mb-4">
+
+                    <form th:action="@{/class/addClass}" method="post" name="addForm"
+                          onsubmit="return beforeSubmit(this)">
+                        <table class="table table-hover">
+                            <tr>
+                                <td text-align="center">CourseID:</td>
+                                <td><input type="text" class="form-control" placeholder="4 digit number" name="classId"></td>
+                            </tr>
+
+                            <tr>
+                                <td text-align="center">Course name:</td>
+                                <td><input type="text" class="form-control" placeholder="Course name" name="className">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td text-align="center">Time:</td>
+                                <td><input type="text" class="form-control" placeholder="dd/mm/yyyy 00:00" name="classBegin">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td text-align="center">Duration:</td>
+                                <td><input type="text" class="form-control" placeholder="xx mins" name="classTime">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td text-align="center">Coach:</td>
+                                <td><input type="text" class="form-control" placeholder="Coach" name="coach">
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="text-align:center;margin-top:20px;margin-bottom:20px">
+                            <input type="submit" class="btn btn-outline-success" value="Add">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="adminCommon::common-footer"></footer>
+    </div>
+</div>
+
+<div th:include="adminCommon::common-scripts"></div>
+<script type="text/javascript">
+    function beforeSubmit(addForm) {
+        if (addForm.classId.value == "") {
+            alert("Please enter courseID!")
+            return false;
+        }
+        if (addForm.className.value == "") {
+            alert("Please enter course name!")
+            return false;
+        }
+        if (addForm.classBegin.value == "") {
+            alert("Please enter course time!")
+            return false;
+        }
+        if (addForm.classTime.value == "") {
+            alert("Please enter course duration！")
+            return false;
+        }
+        if (addForm.coach.value == "") {
+            alert("Please enter coach name!")
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="adminCommon::common-header"></head>
+<body class="sb-nav-fixed">
+<nav th:replace="adminCommon::common-navbar"></nav>
+<div id="layoutSidenav">
+    <div th:replace="adminCommon::common-sidenav"></div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Employee Management</h1>
+
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="@{/toAdminMain}">Homepage</a></li>
+                    <li class="breadcrumb-item active">Employee management</li>
+                </ol>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Employee Information
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                            <tr>
+                                <th>StaffID</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Age</th>
+                                <th>Date Employed</th>
+                                <th>Job Duty</th>
+                                <th>Remarks</th>
+                                <th>Operation</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="emp:${employeeList}">
+                                <td th:text="${emp.employeeAccount}">StaffID</td>
+                                <td th:text="${emp.employeeName}">Name</td>
+                                <td th:text="${emp.employeeGender}">Gender</td>
+                                <td th:text="${emp.employeeAge}">Age</td>
+                                <td th:text="${emp.entryTime}">Date Employed</td>
+                                <td th:text="${emp.staff}">Job Duty</td>
+                                <td th:text="${emp.employeeMessage}">Remarks</td>
+                                <td>
+                                    <a th:href="@{/employee/toUpdateEmployee(employeeAccount=${emp.employeeAccount})}"
+                                       style="text-decoration: none">
+                                        <input type="button" class="btn btn-sm btn-outline-primary" value="Edit">
+                                    </a>
+                                    <a th:href="@{/employee/delEmployee(employeeAccount=${emp.employeeAccount})}"
+                                       style="text-decoration: none">
+                                        <input type="button" class="btn btn-sm btn-outline-danger"
+                                               onclick="return del()" value="Dismiss">
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="text-align:center;margin-top:20px;margin-bottom:20px">
+                    <a th:href="@{/employee/toAddEmployee}">
+                        <input type="button" class="btn btn-outline-success" value="Add employee information">
+                    </a>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="adminCommon::common-footer"></footer>
+    </div>
+</div>
+
+<div th:include="adminCommon::common-scripts"></div>
+<script>
+    function del() {
+        let msg = "Are you sure to delete it?";
+        if (confirm(msg) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+package com.astfitness.service;
+
+import com.astfitness.pojo.ClassOrder;
+
+import java.util.List;
+
+
+
+public interface ClassOrderService {
+
+    //Query all registration information
+    List<ClassOrder> findAll();
+
+    //Add registration information
+    Boolean insertClassOrder(ClassOrder classOrder);
+
+    //Query personal registration schedule based on userID
+    List<ClassOrder> selectClassOrderByMemberAccount(Integer memberAccount);
+
+    //Delete a scheduled course
+    Boolean deleteByClassOrderId(Integer classOrderId);
+
+    //Check whether members have registered for the course
+    ClassOrder selectMemberByClassIdAndMemberAccount(Integer classId, Integer memberAccount);
+
+    //Query all registered members based on course ID
+    List<ClassOrder> selectMemberOrderList(Integer classId);
+
+}
